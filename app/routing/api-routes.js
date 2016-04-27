@@ -22,6 +22,18 @@ module.exports = function(app){
 	// In each of the below cases when a user visits a link 
 	// (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table) 
 	// ---------------------------------------------------------------------------
+	app.get("/api/tables/:user", function(req, res){
+		var user = req.params.user
+		console.log(tableData)
+		for(var i=0; i<tableData.length; i++){
+			if(tableData[i].customerName.toLowerCase() == user){
+				res.json(tableData[i]);
+				return;
+			};
+		};
+	});
+
+
 
 	app.get('/api/tables', function(req, res){
 		res.json(tableData);
@@ -30,6 +42,8 @@ module.exports = function(app){
 	app.get('/api/waitlist', function(req, res){
 		res.json(waitListData);
 	});
+
+
 
 	// API POST Requests
 	// Below code handles when a user submits a form and thus submits data to the server.
